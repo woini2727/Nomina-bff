@@ -30,7 +30,7 @@ public class NominaRestAdapter implements NominaRepository {
 
         return Optional.of(restTemplate.getForObject(url, NominaRestModel.class))
                 .map(model -> {
-                    log.info("");
+                    log.info("Got Nomina model {}", model);
                     return model.toDomain();
                 }).orElseThrow(() -> new NotFoundException(ErrorCode.NOMINA_NOT_FOUND));
     }
