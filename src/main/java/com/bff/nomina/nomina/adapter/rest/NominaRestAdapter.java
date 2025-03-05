@@ -28,7 +28,7 @@ public class NominaRestAdapter implements NominaRepository {
         final String url = config.getNominaRepositoryConfig().getUrl().replace("{cuit}", cuit);
         log.info("Getting Nomina data with CUIT {}", cuit);
 
-        return Optional.of(restTemplate.getForObject(url, NominaRestModel.class))
+        return Optional.ofNullable(restTemplate.getForObject(url, NominaRestModel.class))
                 .map(model -> {
                     log.info("Got Nomina model {}", model);
                     return model.toDomain();
