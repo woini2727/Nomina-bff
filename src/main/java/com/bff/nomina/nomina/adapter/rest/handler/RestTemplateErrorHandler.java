@@ -43,7 +43,7 @@ public class RestTemplateErrorHandler implements ResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse response) throws IOException {
-        final HttpStatus httpStatus = (HttpStatus) response.getStatusCode();
+        final HttpStatus httpStatus = response.getStatusCode();
         final ErrorBody body = parseResponseBody(response);
         final String code = emptyIfNull(body.getCode());
         final String description = emptyIfNull(body.getDescription());

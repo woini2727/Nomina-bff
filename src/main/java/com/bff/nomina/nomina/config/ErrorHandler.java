@@ -34,8 +34,6 @@ import java.util.Optional;
 public class ErrorHandler {
 
     private static final String FIELD_SEPARATOR = ":";
-    private static final String X_B3_TRACE_ID = "X-B3-TraceId";
-    private static final String X_B3_SPAN_ID = "X-B3-SpanId";
     private final HttpServletRequest httpServletRequest;
 
     private final Environment environment;
