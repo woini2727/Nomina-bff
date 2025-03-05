@@ -8,7 +8,7 @@ public abstract class GenericException extends RuntimeException {
     private final ErrorCode errorCode;
 
     protected GenericException(ErrorCode errorCode) {
-        super(errorCode.reasonPhrase());
+        super(errorCode.getReasonPhrase());
         this.errorCode = errorCode;
     }
 

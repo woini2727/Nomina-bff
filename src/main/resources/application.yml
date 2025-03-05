@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME:nomina-bff,base-bff}
+springdoc:
+  swagger-ui:
+    path: /
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,refresh
+
+rest:
+  client:
+    connect-timeout: 5000
+    read-timeout: 10000
+
+async:
+  default-executor:
+    core-pool-size: 10
+    max-pool-size: 15
+    thread-name-prefix: "async-"
+    queue-capacity: 100
+
+nomina:
+  nomina-repository-config:
+    url: "xxx"
