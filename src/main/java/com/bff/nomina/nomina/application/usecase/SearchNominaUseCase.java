@@ -24,12 +24,12 @@ public class SearchNominaUseCase implements SearchNominaQuery {
     }
 
     @Override
-    public CompletionStage<Nomina> getByCuit(String cuit) {
-        return CompletableFuture.supplyAsync(() -> doGet(cuit), executor);
+    public CompletionStage<Nomina> getByCuit(String cuit, String jwt) {
+        return CompletableFuture.supplyAsync(() -> doGet(cuit, jwt), executor);
     }
 
-    private Nomina doGet(String cuit) {
-        return nominaRepository.searchByCuit(cuit);
+    private Nomina doGet(String cuit, String jwt) {
+        return nominaRepository.searchByCuit(cuit, jwt);
     }
 
 

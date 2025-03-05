@@ -1,11 +1,9 @@
 package com.bff.nomina.nomina.adapter.controller;
 
 import com.bff.nomina.nomina.adapter.controller.model.NominaControllerResponseModel;
+import com.bff.nomina.nomina.application.port.in.SearchNominaQuery;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletionStage;
 
@@ -13,13 +11,19 @@ import java.util.concurrent.CompletionStage;
 @RequestMapping("/api/v1/nomina")
 @Slf4j
 public class NominaController {
+    private final SearchNominaQuery searchNominaQuery;
+
+    public NominaController(final SearchNominaQuery searchNominaQuery) {
+        this.searchNominaQuery = searchNominaQuery;
+    }
+
 
     @GetMapping("/{cuit}")
     public CompletionStage<NominaControllerResponseModel> search(
-            @PathVariable final String cuit
-    ){
+            @PathVariable final String cuit,
+            @RequestParam final String jwt
+    ) {
         log.info("Call to get nomina by cuit {}", cuit);
-
-        return null;
+        return searchNominaQuery.getByCuit(cuit, jwt).thenApply(NominaControllerResponseModel::fromDomain);
     }
 }

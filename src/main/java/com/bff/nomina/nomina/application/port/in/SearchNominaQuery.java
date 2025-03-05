@@ -6,5 +6,5 @@ import java.util.concurrent.CompletionStage;
 
 public interface SearchNominaQuery {
 
-    CompletionStage<Nomina> getByCuit(String cuit);
+    CompletionStage<Nomina> getByCuit(String cuit, String jwt);
 }

@@ -30,4 +30,4 @@ async:
 
 nomina:
   nomina-repository-config:
-    url: "servicios-testing.colegio-escribanos.org.ar:8444/nomina-escribanos-ws/escribano/estado/{cuit}"
+    url: "https://servicios-testing.colegio-escribanos.org.ar:8444/nomina-escribanos-ws/escribano/estado"
