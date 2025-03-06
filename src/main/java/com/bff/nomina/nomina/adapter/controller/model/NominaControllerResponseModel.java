@@ -2,7 +2,6 @@ package com.bff.nomina.nomina.adapter.controller.model;
 
 import com.bff.nomina.nomina.domain.Nomina;
 import lombok.Builder;
-import lombok.NonNull;
 import lombok.Value;
 
 import java.math.BigInteger;

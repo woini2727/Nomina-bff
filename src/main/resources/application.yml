@@ -3,7 +3,7 @@ spring:
     name: ${APPLICATION_NAME:nomina-bff,base-bff}
 springdoc:
   swagger-ui:
-    path: /
+    path: /swagger
 ---
 spring:
   config:
