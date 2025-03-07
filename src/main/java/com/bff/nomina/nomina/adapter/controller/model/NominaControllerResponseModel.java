@@ -10,8 +10,9 @@ import java.math.BigInteger;
 @Value
 public class NominaControllerResponseModel {
      String apellido;
-     String barrio;
+     String nombre;
      String cargo;
+     String barrio;
      String celular;
      String dias;
      String domicilio;
@@ -24,7 +25,6 @@ public class NominaControllerResponseModel {
      BigInteger matricula;
      BigInteger registro;
      Boolean mostrarImagen;
-     String nombre;
      String sexo;
      String telefono;
 
