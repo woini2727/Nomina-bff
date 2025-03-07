@@ -34,14 +34,15 @@ function base64url(source) {
 
 var stringifiedHeader = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
 var encodedHeader = base64url(stringifiedHeader);
-document.getElementById("header").innerText = encodedHeader;
 
 var stringifiedData = CryptoJS.enc.Utf8.parse(JSON.stringify(data));
 var encodedData = base64url(stringifiedData);
-document.getElementById("payload").innerText = encodedData;
 
 var signature = encodedHeader + "." + encodedData;
 signature = CryptoJS.HmacSHA256(signature, secret);
 signature = base64url(signature);
 
-document.getElementById("signature").innerText = signature;
+var jwtResult = encodedHeader +  "." + encodedData+ "." +signature;
+document.getElementById("jwt").value = jwtResult;
+console.log(jwtResult)
+console.log(document.getElementById("jwt").value)

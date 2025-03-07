@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.concurrent.CompletionStage;
 
 @Controller
@@ -20,32 +19,16 @@ public class NominaController {
         this.searchNominaQuery = searchNominaQuery;
     }
 
-
-    @GetMapping("/{cuit}")
-    public CompletionStage<NominaControllerResponseModel> search(
-            @PathVariable final String cuit,
-            @RequestParam final String jwt
-    ) {
-        log.info("Call to get nomina by cuit {}", cuit);
-        return searchNominaQuery.getByCuit(cuit, jwt).thenApply(NominaControllerResponseModel::fromDomain);
-    }
-
-    /*@GetMapping("/test")
-    public String addNewEmployee(Model model) {
-        NominaControllerResponseModel nomina = NominaControllerResponseModel.builder()
-                        .apellido("AAA").build();
-        log.info("xdd");
-        model.addAttribute("nomina", Collections.singletonList(nomina) );
-        return "index";
-    }*/
-
     @GetMapping("/search")
-    public String ss(Model model, @RequestParam final String cuit) {
-        NominaControllerResponseModel nomina = NominaControllerResponseModel.builder()
-                .apellido("AAA").build();
-        log.info(cuit);
-        model.addAttribute("nomina", Collections.singletonList(nomina) );
-        return "index";
+    public CompletionStage<String> search(Model model, @RequestParam final String cuit, @RequestParam final String jwt) {
+        log.info("Call to get nomina by cuit {} and jwt {}", cuit, jwt);
+        return searchNominaQuery.getByCuit(cuit, jwt).thenApply(NominaControllerResponseModel::fromDomain)
+                .thenApply(nomina -> {
+                            model.addAttribute("nomina", nomina);
+                            return "index";
+                        }
+                );
+
     }
 
 }
