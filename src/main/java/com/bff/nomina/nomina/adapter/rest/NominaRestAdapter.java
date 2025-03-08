@@ -33,8 +33,9 @@ public class NominaRestAdapter implements NominaRepository {
 
     @Override
     public Nomina searchByCuit(String cuit, String jwt) {
-        final String url = config.getNominaRepositoryConfig().getUrl() + "/" + cuit;
-        log.info("Getting Nomina data with CUIT {} to url {} ", cuit, url);
+        String cuitFormated = cuit.replace("-", "");
+        final String url = config.getNominaRepositoryConfig().getUrl() + "/" + cuitFormated;
+        log.info("Getting Nomina data with CUIT {} to url {} ", cuitFormated, url);
         final HttpEntity<Void> httpEntity = new HttpEntity<>(headersProvider.get(jwt));
 
         return Optional.ofNullable(restTemplate.exchange(url, HttpMethod.GET, httpEntity, NominaRestModel.class).getBody())

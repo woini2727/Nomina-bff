@@ -20,7 +20,11 @@ public class NominaController {
     }
 
     @GetMapping("/search")
-    public CompletionStage<String> search(Model model, @RequestParam final String cuit, @RequestParam final String jwt) {
+    public CompletionStage<String> search(
+            Model model,
+            @RequestParam final String cuit,
+            @RequestParam final String jwt
+    ) {
         log.info("Call to get nomina by cuit {} and jwt {}", cuit, jwt);
         return searchNominaQuery.getByCuit(cuit, jwt).thenApply(NominaControllerResponseModel::fromDomain)
                 .thenApply(nomina -> {

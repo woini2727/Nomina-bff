@@ -16,7 +16,7 @@
             <input type="text" style="display: none;" name="jwt" id="jwt" hidden>
             <div th:insert="~{jwt::jwt}"></div>
             <label for="cuit" class="sr-only">CUIT</label>
-            <input type="text" class="form-control" name="cuit" id="cuit" placeholder="XX-XXXXXXXXX-X">
+            <input type="text" class="form-control" name="cuit" id="cuit" placeholder="XX-XXXXXXXXX-X" pattern="^\d{2}-\d{7,8}-\d{1}$">
             <button type="submit" class="btn btn-primary ml-2">Buscar</button>
     </form>
     </div>

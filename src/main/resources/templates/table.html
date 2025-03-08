@@ -1,7 +1,10 @@
 <div th:fragment="table" class="container row">
     <th:block th:each="nom : ${nomina}">
         <div class="col-2">
-            <img th:src="@{image/medium.webp}" alt="img" class="img-fluid img-thumbnail"/>
+            <img    th:if ="${nom.mostrarImagen}"
+                    th:src="@{nom.imagen}" alt="img" class="img-fluid img-thumbnail"/>
+            <img    th:unless ="${nom.mostrarImagen}"
+                    th:src="@{image/medium.webp}" alt="img" class="img-fluid img-thumbnail"/>
         </div>
         <div class="col-10">
             <table class="table">
