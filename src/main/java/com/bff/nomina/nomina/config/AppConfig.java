@@ -1,6 +1,5 @@
 package com.bff.nomina.nomina.config;
 
-import com.bff.nomina.nomina.config.async.AsyncConfig;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.cloud.sleuth.instrument.async.LazyTraceExecutor;
 import org.springframework.context.annotation.Bean;
