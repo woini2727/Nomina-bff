@@ -18,14 +18,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import java.net.SocketTimeoutException;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -91,9 +90,13 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(RestClientGenericException.class)
-    public ResponseEntity<ApiErrorResponse> handleRestClient(RestClientGenericException ex) {
+    public ModelAndView handleRestClient(RestClientGenericException ex) {
         log.error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), ex);
-        return buildResponseError(HttpStatus.INTERNAL_SERVER_ERROR, ex, ex.getCode());
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", ex);
+        mav.setViewName("error");
+        return mav;
+
     }
 
     @ExceptionHandler(ResourceAccessException.class)

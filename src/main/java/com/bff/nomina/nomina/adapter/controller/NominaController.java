@@ -26,9 +26,13 @@ public class NominaController {
             @RequestParam final String jwt
     ) {
         log.info("Call to get nomina by cuit {} and jwt {}", cuit, jwt);
-        return searchNominaQuery.getByCuit(cuit, jwt).thenApply(NominaControllerResponseModel::fromDomain)
+        return searchNominaQuery.getByCuit(cuit, jwt)
                 .thenApply(nomina -> {
-                            model.addAttribute("nomina", nomina);
+                            if (nomina.isEmpty()) {
+                                log.info("Nomina is null");
+                                String errorMessage = "El cuit " + cuit + " no tiene resultado.";
+                                model.addAttribute("error", errorMessage);
+                            } else model.addAttribute("nomina", NominaControllerResponseModel.fromDomain(nomina.get()));
                             return "index";
                         }
                 );

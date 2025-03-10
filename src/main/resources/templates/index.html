@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Nomina de escribanos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
@@ -16,13 +16,18 @@
             <input type="text" style="display: none;" name="jwt" id="jwt" hidden>
             <div th:insert="~{jwt::jwt}"></div>
             <label for="cuit" class="sr-only">CUIT</label>
-            <input type="text" class="form-control" name="cuit" id="cuit" placeholder="XX-XXXXXXXXX-X" pattern="^\d{2}-\d{7,8}-\d{1}$">
+            <input type="text" class="form-control" name="cuit" id="cuit" title="Ingrese CUIT/CUIL con el formato correcto"
+                   placeholder="XX-XXXXXXXXX-X" required="required" pattern="^\d{2}-\d{7,8}-\d{1}$" >
             <button type="submit" class="btn btn-primary ml-2">Buscar</button>
     </form>
     </div>
     <hr>
-    <h2 class="mx-sm-3 mb-4">Resultado</h2>
-    <div th:insert="~{table::table}"></div>
+    <h2 class="mx-sm-3 mb-4">Resultado:</h2>
+    <div th:if="${error}">
+        <span th:text="${error.toString()}" class="mx-sm-3 mb-4">
+        </span>
+    </div>
+    <div  th:if = "${nomina}" th:insert="~{table::table}"></div>
 </div>
 
 
