@@ -8,7 +8,7 @@ springdoc:
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: default
 
 management:
   endpoints:
