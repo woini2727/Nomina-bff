@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: nominas-bff
+
+rest:
+  client:
+    connect-timeout: 5000
+    read-timeout: 10000
