@@ -1,7 +1,8 @@
 package com.bff.nomina.nomina.adapter.rest;
 
-import com.bff.nomina.nomina.application.port.out.NominaRepository;
+import com.bff.nomina.nomina.config.ErrorCode;
 import com.bff.nomina.nomina.config.TestConfig;
+import com.bff.nomina.nomina.config.exception.NotFoundException;
 import com.bff.nomina.nomina.domain.Nomina;
 import com.bff.nomina.nomina.mock.NominaMockFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @DisplayName("SWCharacterRest Adapter Test")
@@ -56,13 +58,23 @@ class NominaRestAdapterTest {
     }
 
     @Test
-    @DisplayName("when getById is called, the adapter should return a Star Wars character")
+    @DisplayName("when get is called the adapter should return a nomina")
     void testGetByIdSuccessfully() throws JsonProcessingException {
         final String detailString = objectMapper.writeValueAsString(Nomina.builder().build());
         server.expect(requestTo("http://localhost:4567/" + CUIT)).andRespond(withSuccess(detailString, MediaType.APPLICATION_JSON));
         final Nomina expected = NominaMockFactory.buildNomina();
         final Nomina actual = client.searchByCuit(CUIT,JWT_TOKEN);
         Assertions.assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("when get is called the adapter should return a NotFound Exceptionm")
+    void testSearchByCuitReturnBadRequest() {
+        server.expect(requestTo("http://localhost:4567/" + CUIT))
+                .andRespond(withNoContent());
+        final Throwable thrown = Assertions.catchThrowable(() -> client.searchByCuit(CUIT,JWT_TOKEN));
+        Assertions.assertThat(thrown).isExactlyInstanceOf(NotFoundException.class)
+                .hasMessage(ErrorCode.NOMINA_NOT_FOUND.getReasonPhrase());
     }
 
 }

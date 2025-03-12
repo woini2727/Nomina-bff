@@ -25,15 +25,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("Nomina Controller Adapter Test")
 @WebMvcTest(NominaController.class)
 @Import({TestConfig.class})
-
 class NominaControllerAdapterTest {
     private static final String CUIT = "20-36972497-3";
     private static final String JWT_TOKEN = "random token";
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @MockBean
     private SearchNominaQuery searchNominaQuery;
@@ -54,8 +50,8 @@ class NominaControllerAdapterTest {
     }
 
     @Test
-    @DisplayName("when get is called with an invalid id the adapter should return a Bad Request")
-    void testGetSWCharacterByIdWithAnInvalidId() throws Exception {
+    @DisplayName("when search is called without jwt should return a Bad Request")
+    void getAuthenticatedNominaWithoutJwtReturnBadRequest() throws Exception {
         final String expected = "{ \"name\": \"Bad Request\", " +
                 "\"description\": \"Parameter jwt of type String is required\", " +
                 "\"code\": \"400:101\" }";
@@ -69,8 +65,8 @@ class NominaControllerAdapterTest {
     }
 
     @Test
-    @DisplayName("when get is called with an invalid id the adapter should return a Bad Request")
-    void testGetSWCharacterByIdWithAnInvalidI() throws Exception {
+    @DisplayName("when search is called without cuit should return a Bad Request")
+    void getAuthenticatedNominaWithoutCuitReturnBadRequest() throws Exception {
         final String expected = "{ \"name\": \"Bad Request\", " +
                 "\"description\": \"Parameter cuit of type String is required\", " +
                 "\"code\": \"400:101\" }";
