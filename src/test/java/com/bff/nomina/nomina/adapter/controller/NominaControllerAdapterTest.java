@@ -3,7 +3,6 @@ package com.bff.nomina.nomina.adapter.controller;
 import com.bff.nomina.nomina.application.port.in.SearchNominaQuery;
 import com.bff.nomina.nomina.config.TestConfig;
 import com.bff.nomina.nomina.domain.Nomina;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

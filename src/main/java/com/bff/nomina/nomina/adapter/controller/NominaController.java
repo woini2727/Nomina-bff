@@ -2,6 +2,7 @@ package com.bff.nomina.nomina.adapter.controller;
 
 import com.bff.nomina.nomina.adapter.controller.model.NominaControllerResponseModel;
 import com.bff.nomina.nomina.application.port.in.SearchNominaQuery;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,11 @@ public class NominaController {
     }
 
     @GetMapping("/search")
+    @Operation(
+            tags = {"Nominas"},
+            summary = "Consulta las nominas de escribanos",
+            description = "Este endpoint esta se encarga de consultar las nominas"
+    )
     public CompletionStage<String> search(
             Model model,
             @RequestParam final String cuit,
