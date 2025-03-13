@@ -32,7 +32,7 @@ class SearchNominaUseCaseTest {
 
     @Test
     @DisplayName("When it called it should return an Optional of Nomina")
-    void whenGetByCuitisCalledShouldReturnNominaOptional() {
+    void whenGetByCuitIsCalledShouldReturnNominaOptional() {
         final Nomina expectedNomina = NominaMockFactory.buildNomina();
 
         Mockito.when(nominaRepository.searchByCuit(CUIT, JWT_TOKEN)).thenReturn(expectedNomina);
@@ -44,7 +44,7 @@ class SearchNominaUseCaseTest {
 
     @Test
     @DisplayName("when get by cuit is called should return an empty optional")
-    void whenGetByCuitisCalledShouldReturnEmptyOptional() {
+    void whenGetByCuitIsCalledShouldReturnEmptyOptional() {
         Mockito.when(nominaRepository.searchByCuit(CUIT, JWT_TOKEN)).thenThrow(NotFoundException.class);
         final Optional<Nomina> actual = usecase.getByCuit(CUIT, JWT_TOKEN).toCompletableFuture().join();
         Assertions.assertThat(actual).isEmpty();

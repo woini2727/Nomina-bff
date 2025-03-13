@@ -59,7 +59,7 @@ class NominaRestAdapterTest {
 
     @Test
     @DisplayName("when get is called the adapter should return a nomina")
-    void testGetByIdSuccessfully() throws JsonProcessingException {
+    void testGetByCuitSuccessfully() throws JsonProcessingException {
         final String detailString = objectMapper.writeValueAsString(Nomina.builder().build());
         server.expect(requestTo("http://localhost:4567/" + CUIT)).andRespond(withSuccess(detailString, MediaType.APPLICATION_JSON));
         final Nomina expected = NominaMockFactory.buildNomina();

@@ -42,7 +42,6 @@ public class TestConfig {
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Config getConfig() {
-        final String templateLocation = "src/test/resources";
         final Config config = new Config();
 
         final Config.NominaRepositoryConfig nominaRepositoryConfig = new Config.NominaRepositoryConfig();
